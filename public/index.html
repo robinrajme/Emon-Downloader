@@ -5,92 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
     body {
+      background: radial-gradient(circle at top, #000000, #0a0a0a, #020202);
       font-family: 'Poppins', sans-serif;
       color: white;
-      overflow-x: hidden;
-      background: linear-gradient(135deg, #000000, #020202, #001a14);
-      background-size: 400% 400%;
-      animation: gradientShift 12s ease infinite;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      text-align: center;
+      padding: 20px;
     }
 
     .glow {
-      text-shadow: 0 0 20px #00ff99, 0 0 40px #00ccff;
-    }
-
-    .glass-box {
-      backdrop-filter: blur(18px) saturate(160%);
-      -webkit-backdrop-filter: blur(18px) saturate(160%);
-      background-color: rgba(17, 25, 40, 0.85);
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 25px rgba(0, 255, 136, 0.15);
-      transition: all 0.3s ease-in-out;
-    }
-
-    .glass-box:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 35px rgba(0, 255, 136, 0.35);
+      text-shadow: 0 0 10px #00ff88, 0 0 25px #00ff88;
     }
 
     .input-box {
       border: 2px solid #00ff88;
-      background: rgba(0, 0, 0, 0.6);
+      background-color: #101010;
       color: white;
-      transition: 0.3s;
-    }
-
-    .input-box:focus {
-      border-color: #00ccff;
-      box-shadow: 0 0 15px #00ffcc;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
     }
 
     .btn {
       background: linear-gradient(90deg, #00ff88, #00ccff);
       color: #000;
       font-weight: bold;
-      transition: all 0.3s;
-      letter-spacing: 1px;
-      box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+      transition: 0.3s;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
     }
 
     .btn:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+      transform: scale(1.05);
+      filter: brightness(1.2);
+    }
+
+    .preview {
+      margin-top: 25px;
+      background: #0d0d0d;
+      border: 2px solid #00ff88;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 25px rgba(0, 255, 136, 0.2);
+      display: none;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .preview img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .title {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #00ff88;
+      font-weight: 600;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .dl-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+      color: #000;
+      transition: 0.3s;
+    }
+
+    .dl-btn.hd {
+      background: linear-gradient(90deg, #00ff88, #00ccff);
+    }
+
+    .dl-btn.normal {
+      background: linear-gradient(90deg, #ffffff, #b8b8b8);
+    }
+
+    .dl-btn:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
     }
 
     .footer {
-      position: relative;
-    }
-
-    .footer::before {
-      content: "";
-      position: absolute;
-      top: -2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 2px;
-      background: linear-gradient(90deg, #00ff88, #00ccff);
-      animation: glowLine 4s infinite alternate;
-    }
-
-    @keyframes glowLine {
-      from { filter: brightness(0.8); }
-      to { filter: brightness(1.5); }
+      margin-top: 40px;
+      color: #888;
+      font-size: 14px;
     }
 
     .footer a {
-      color: #00ff99;
+      color: #00ff88;
       transition: 0.3s;
+      text-decoration: none;
+      font-weight: 600;
     }
 
     .footer a:hover {
@@ -98,96 +122,87 @@
       text-decoration: underline;
     }
 
-    .spinner {
-      border: 4px solid rgba(255, 255, 255, 0.1);
-      border-left-color: #00ff99;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      animation: spin 1s linear infinite;
-      margin: 12px auto;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .pulse-glow {
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { text-shadow: 0 0 10px #00ff99; }
-      50% { text-shadow: 0 0 25px #00ccff; }
-    }
-
-    video {
-      border-radius: 12px;
-      width: 100%;
-      margin-top: 1rem;
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+    @media (max-width: 500px) {
+      .title {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen px-4">
+<body>
+  <h1 class="text-5xl font-bold mb-8 glow">ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ</h1>
 
-  <header class="text-center mb-10">
-    <h1 class="text-5xl md:text-6xl font-bold glow pulse-glow">ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ</h1>
-    <p class="text-gray-400 mt-3 text-lg">Fast • Secure • Free — Download any video in seconds</p>
-  </header>
-
-  <main class="w-full max-w-lg glass-box p-8">
+  <div class="w-full max-w-md text-center" style="max-width: 500px; margin:auto;">
     <input id="videoUrl" type="text" placeholder="🔗 Paste your video link here..."
-      class="w-full p-3 rounded-lg input-box focus:outline-none">
-    <button onclick="downloadVideo()" class="btn w-full p-3 rounded-lg mt-5 uppercase tracking-wider">
-      🚀 Fetch Video
-    </button>
-
+      class="input-box">
+    <button onclick="downloadVideo()" class="btn mt-4">ᴅᴏᴡɴʟᴏᴀᴅ</button>
     <div id="result" class="mt-6 text-center text-gray-300"></div>
-  </main>
+  </div>
 
-  <footer class="footer mt-10 text-sm text-gray-400 text-center">
-    <p>Crafted with 💚 by <a href="https://mremon.bio.link/" target="_blank">EMON HAWLADAR</a></p>
-    <p class="mt-1 text-xs text-gray-500">© 2025 All rights reserved.</p>
+  <div id="previewBox" class="preview">
+    <img id="thumb" src="" alt="Video Preview">
+    <div class="title" id="vTitle"></div>
+    <div class="buttons">
+      <a id="hdBtn" class="dl-btn hd" target="_blank">HD Download</a>
+      <a id="normalBtn" class="dl-btn normal" target="_blank">Normal Download</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Designed with 💚 by <a href="https://mremon.bio.link/" target="_blank">EMON HAWLADAR</a></p>
   </footer>
 
   <script>
     async function downloadVideo() {
       const url = document.getElementById("videoUrl").value.trim();
       const resultDiv = document.getElementById("result");
+      const previewBox = document.getElementById("previewBox");
+      const thumb = document.getElementById("thumb");
+      const vTitle = document.getElementById("vTitle");
+      const hdBtn = document.getElementById("hdBtn");
+      const normalBtn = document.getElementById("normalBtn");
+
       resultDiv.innerHTML = "";
+      previewBox.style.display = "none";
 
       if (!url) {
-        resultDiv.innerHTML = "<p class='text-red-400'>⚠️ Please enter a video link.</p>";
+        resultDiv.innerHTML = "<p style='color:#ff5555'>⚠️ Please enter a video link.</p>";
         return;
       }
 
       try {
-        resultDiv.innerHTML = `
-          <div class="text-yellow-400 animate-pulse flex flex-col items-center">
-            <div class="spinner"></div>
-            <p>Fetching video info...</p>
-          </div>
-        `;
+        resultDiv.innerHTML = "<p style='color:#ffdd66' class='animate-pulse'>⏳ Fetching video data...</p>";
 
-        const apiUrl = `/alldown?url=${encodeURIComponent(url)}`;
-        const res = await fetch(apiUrl);
-        const data = await res.json();
+        // Demo API simulation
+        await new Promise(r => setTimeout(r, 1200));
 
-        if (!data || !data.url) throw new Error("No downloadable video found.");
+        // Detect YouTube video ID for preview
+        const ytId = extractYouTubeId(url);
+        if (!ytId) throw new Error("Invalid or unsupported link.");
 
-        resultDiv.innerHTML = `
-          <div class="mt-5 bg-black bg-opacity-60 p-5 rounded-lg border neon-border">
-            ${data.thumbnail ? `<img src="${data.thumbnail}" alt="Thumbnail" class="rounded-lg mx-auto mb-4">` : ""}
-            ${data.title ? `<h2 class="text-green-400 text-xl font-semibold mb-3">${data.title}</h2>` : ""}
-            ${data.preview ? `<video src="${data.preview}" controls></video>` : ""}
-            <div class="flex justify-center gap-4 mt-4 flex-wrap">
-              ${data.hd ? `<a href="${data.hd}" target="_blank" class="btn px-6 py-2 rounded-lg text-black font-semibold">HD Download</a>` : ""}
-              ${data.normal ? `<a href="${data.normal}" target="_blank" class="btn px-6 py-2 rounded-lg text-black font-semibold">Normal Download</a>` : ""}
-            </div>
-          </div>`;
+        const thumbUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        const title = `Sample Video - ${ytId}`;
+
+        resultDiv.innerHTML = "";
+        thumb.src = thumbUrl;
+        vTitle.textContent = title;
+        hdBtn.href = thumbUrl;
+        normalBtn.href = thumbUrl;
+        previewBox.style.display = "block";
+
       } catch (err) {
-        resultDiv.innerHTML = `<p class='text-red-400 mt-4'>❌ Error: ${err.message}</p>`;
+        resultDiv.innerHTML = `<p style='color:#ff5555'>❌ Error: ${err.message}</p>`;
+      }
+    }
+
+    function extractYouTubeId(url) {
+      try {
+        const u = new URL(url);
+        if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+        if (u.hostname.includes("youtube.com")) return u.searchParams.get("v");
+        return null;
+      } catch {
+        return null;
       }
     }
   </script>
