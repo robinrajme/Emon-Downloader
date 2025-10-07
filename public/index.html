@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>岽犐磪岽囜磸 岽呩磸岽∩词熱磸岽�岽呩磭蕗</title>
+  <title>ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
@@ -41,17 +41,17 @@
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen text-white px-4">
 
-  <h1 class="text-5xl font-bold mb-8 glow text-center">岽犐磪岽囜磸 岽呩磸岽∩词熱磸岽�岽呩磭蕗</h1>
+  <h1 class="text-5xl font-bold mb-8 glow text-center">ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ</h1>
 
   <div class="w-full max-w-md text-center">
-    <input id="videoUrl" type="text" placeholder="馃敆 Paste your video link here..."
+    <input id="videoUrl" type="text" placeholder="🔗 Paste your video link here..."
       class="w-full p-3 rounded-lg input-box focus:outline-none">
-    <button onclick="downloadVideo()" class="btn w-full p-3 rounded-lg mt-4">岽呩磸岽∩词熱磸岽�岽�</button>
+    <button onclick="downloadVideo()" class="btn w-full p-3 rounded-lg mt-4">ᴅᴏᴡɴʟᴏᴀᴅ</button>
     <div id="result" class="mt-6 text-center text-gray-300"></div>
   </div>
 
   <footer class="footer mt-12 text-sm text-gray-400 text-center">
-    <p>Designed with 馃挌 by <a href="https://mremon.bio.link/" target="_blank">EMON HAWLADAR</a></p>
+    <p>Designed with 💚 by <a href="https://mremon.bio.link/" target="_blank">EMON HAWLADAR</a></p>
   </footer>
 
   <script>
@@ -61,12 +61,12 @@
       resultDiv.innerHTML = "";
 
       if (!url) {
-        resultDiv.innerHTML = "<p class='text-red-400'>鈿狅笍 Please enter a video link.</p>";
+        resultDiv.innerHTML = "<p class='text-red-400'>⚠️ Please enter a video link.</p>";
         return;
       }
 
       try {
-        resultDiv.innerHTML = "<p class='text-yellow-400 animate-pulse'>鈴� Fetching video data...</p>";
+        resultDiv.innerHTML = "<p class='text-yellow-400 animate-pulse'>⏳ Fetching video data...</p>";
         const apiUrl = `/alldown?url=${encodeURIComponent(url)}`;
         const res = await fetch(apiUrl);
         const data = await res.json();
@@ -75,14 +75,14 @@
 
         resultDiv.innerHTML = `
           <div class="mt-4 bg-gray-900 p-4 rounded-lg border border-green-400">
-            <h2 class="text-green-400 text-xl mb-3 font-semibold">鉁� Download Ready:</h2>
+            <h2 class="text-green-400 text-xl mb-3 font-semibold">✅ Download Ready:</h2>
             <a href="${data.url}" target="_blank" 
                class="text-blue-400 hover:text-blue-300 underline text-lg">
-               馃帪 Download (${data.quality || "HD"})
+               🎞 Download (${data.quality || "HD"})
             </a>
           </div>`;
       } catch (err) {
-        resultDiv.innerHTML = `<p class='text-red-400'>鉂� Error: ${err.message}</p>`;
+        resultDiv.innerHTML = `<p class='text-red-400'>❌ Error: ${err.message}</p>`;
       }
     }
   </script>
