@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
 import { execSync } from "child_process";
+import nayan  from "nayan-media-downloaders"
 
 const app = express();
 app.use(cors());
@@ -12,20 +13,15 @@ app.get("/alldown", async (req, res) => {
   if (!videoUrl) return res.json({ error: "No URL provided." });
 
   try {
-    // Auto-install library if missing
-    try {
-      execSync("npm install nayan-media-downloader@0.1.8 --force", { stdio: "ignore" });
-    } catch {}
 
-    const { ttdownloader } = await import("nayan-media-downloader");
 
-    const result = await ttdownloader(videoUrl);
-    if (!result || !result.video || !result.video[0])
+    const result = await nayan.alldown(videoUrl);
+    if (!result || !result.data)
       return res.json({ error: "No downloadable video found." });
 
     res.json({
-      url: result.video[0].url,
-      quality: result.video[0].quality || "HD",
+      url: result.data.high,
+      quality: "HD",
       platform: result.platform || "Unknown"
     });
   } catch (e) {
