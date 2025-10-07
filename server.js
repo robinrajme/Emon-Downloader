@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
 import { execSync } from "child_process";
-import nayan  from "nayan-media-downloader"
+import nayan  from "nayan-media-downloaders"
 
 const app = express();
 app.use(cors());
