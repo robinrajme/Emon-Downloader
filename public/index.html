@@ -6,52 +6,110 @@
   <title>ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
   <style>
     body {
-      background: radial-gradient(circle at top, #000000, #0a0a0a, #020202);
+      background: radial-gradient(circle at top, #000000, #050505, #010101);
       font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow-x: hidden;
     }
+
     .glow {
-      text-shadow: 0 0 10px #00ff88, 0 0 25px #00ff88;
+      text-shadow: 0 0 15px #00ff99, 0 0 40px #00ffcc;
     }
+
+    .glass-box {
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background-color: rgba(17, 25, 40, 0.75);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+      box-shadow: 0 0 25px rgba(0, 255, 136, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .glass-box:hover {
+      box-shadow: 0 0 40px rgba(0, 255, 136, 0.4);
+    }
+
     .input-box {
       border: 2px solid #00ff88;
-      background-color: #101010;
+      background: rgba(0, 0, 0, 0.6);
       color: white;
+      transition: 0.3s;
     }
+
+    .input-box:focus {
+      border-color: #00ccff;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+
     .btn {
       background: linear-gradient(90deg, #00ff88, #00ccff);
       color: #000;
       font-weight: bold;
-      transition: 0.3s;
+      transition: all 0.3s;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
     }
+
     .btn:hover {
-      transform: scale(1.05);
-      filter: brightness(1.2);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
     }
+
     .footer a {
-      color: #00ff88;
+      color: #00ff99;
       transition: 0.3s;
     }
+
     .footer a:hover {
       color: #00ccff;
       text-decoration: underline;
     }
+
+    .neon-border {
+      border-image: linear-gradient(90deg, #00ffcc, #00ff88) 1;
+    }
+
+    .pulse-glow {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 10px #00ff99; }
+      50% { text-shadow: 0 0 20px #00ccff; }
+    }
+
+    video {
+      border-radius: 12px;
+      width: 100%;
+      margin-top: 1rem;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+    }
   </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen text-white px-4">
+<body class="flex flex-col items-center justify-center min-h-screen px-4">
 
-  <h1 class="text-5xl font-bold mb-8 glow text-center">ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ</h1>
+  <header class="text-center mb-10">
+    <h1 class="text-5xl md:text-6xl font-bold glow pulse-glow">ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ</h1>
+    <p class="text-gray-400 mt-3 text-lg">Preview and download any video in HD or Normal quality</p>
+  </header>
 
-  <div class="w-full max-w-md text-center">
+  <main class="w-full max-w-lg glass-box p-8">
     <input id="videoUrl" type="text" placeholder="🔗 Paste your video link here..."
       class="w-full p-3 rounded-lg input-box focus:outline-none">
-    <button onclick="downloadVideo()" class="btn w-full p-3 rounded-lg mt-4">ᴅᴏᴡɴʟᴏᴀᴅ</button>
-    <div id="result" class="mt-6 text-center text-gray-300"></div>
-  </div>
+    <button onclick="downloadVideo()" class="btn w-full p-3 rounded-lg mt-5 uppercase tracking-wider">
+      🚀 Fetch Video
+    </button>
 
-  <footer class="footer mt-12 text-sm text-gray-400 text-center">
-    <p>Designed with 💚 by <a href="https://mremon.bio.link/" target="_blank">EMON HAWLADAR</a></p>
+    <div id="result" class="mt-6 text-center text-gray-300"></div>
+  </main>
+
+  <footer class="footer mt-10 text-sm text-gray-400 text-center">
+    <p>Crafted with 💚 by <a href="https://mremon.bio.link/" target="_blank">EMON HAWLADAR</a></p>
+    <p class="mt-1 text-xs text-gray-500">© 2025 All rights reserved.</p>
   </footer>
 
   <script>
@@ -66,23 +124,27 @@
       }
 
       try {
-        resultDiv.innerHTML = "<p class='text-yellow-400 animate-pulse'>⏳ Fetching video data...</p>";
+        resultDiv.innerHTML = "<p class='text-yellow-400 animate-pulse'>⏳ Fetching video info...</p>";
+
         const apiUrl = `/alldown?url=${encodeURIComponent(url)}`;
         const res = await fetch(apiUrl);
         const data = await res.json();
 
         if (!data || !data.url) throw new Error("No downloadable video found.");
 
+        // Example: data should have { url, hd, normal, title, thumbnail }
         resultDiv.innerHTML = `
-          <div class="mt-4 bg-gray-900 p-4 rounded-lg border border-green-400">
-            <h2 class="text-green-400 text-xl mb-3 font-semibold">✅ Download Ready:</h2>
-            <a href="${data.url}" target="_blank" 
-               class="text-blue-400 hover:text-blue-300 underline text-lg">
-               🎞 Download (${data.quality || "HD"})
-            </a>
+          <div class="mt-5 bg-black bg-opacity-60 p-5 rounded-lg border neon-border">
+            ${data.thumbnail ? `<img src="${data.thumbnail}" alt="Thumbnail" class="rounded-lg mx-auto mb-4">` : ""}
+            ${data.title ? `<h2 class="text-green-400 text-xl font-semibold mb-3">${data.title}</h2>` : ""}
+            ${data.preview ? `<video src="${data.preview}" controls></video>` : ""}
+            <div class="flex justify-center gap-4 mt-4">
+              ${data.hd ? `<a href="${data.hd}" target="_blank" class="btn px-6 py-2 rounded-lg text-black font-semibold">HD Download</a>` : ""}
+              ${data.normal ? `<a href="${data.normal}" target="_blank" class="btn px-6 py-2 rounded-lg text-black font-semibold">Normal Download</a>` : ""}
+            </div>
           </div>`;
       } catch (err) {
-        resultDiv.innerHTML = `<p class='text-red-400'>❌ Error: ${err.message}</p>`;
+        resultDiv.innerHTML = `<p class='text-red-400 mt-4'>❌ Error: ${err.message}</p>`;
       }
     }
   </script>
