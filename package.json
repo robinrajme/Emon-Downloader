@@ -4,7 +4,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "vercel-build": "echo 'Vercel build complete!'"
   },
   "dependencies": {
     "chalk": "^5.6.0",
@@ -12,5 +13,8 @@
     "cors": "^2.8.5",
     "nayan-media-downloaders": "^0.1.8",
     "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
