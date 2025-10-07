@@ -67,7 +67,7 @@
 
       try {
         resultDiv.innerHTML = "<p class='text-yellow-400 animate-pulse'>⏳ Fetching video data...</p>";
-        const apiUrl = `/api/alldown?url=${encodeURIComponent(url)}`;
+        const apiUrl = `/alldown?url=${encodeURIComponent(url)}`;
         const res = await fetch(apiUrl);
         const data = await res.json();
 
