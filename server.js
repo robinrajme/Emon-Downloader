@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.static("public")); // for index.html
 
-app.get("/api/download", async (req, res) => {
+app.get("/api/alldown", async (req, res) => {
   const videoUrl = req.query.url;
   if (!videoUrl) return res.json({ error: "No URL provided." });
 
